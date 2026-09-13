@@ -84,6 +84,7 @@ namespace Emby.Plugins.Moonfin.Api
                 // Older plugins leave this out, which the app reads as false and hides the
                 // messages button.
                 messagesSupported = true,
+                clientLogSupported = config?.EnableClientLogUpload ?? false,
                 defaultSettings = config?.DefaultUserSettings
             });
         }

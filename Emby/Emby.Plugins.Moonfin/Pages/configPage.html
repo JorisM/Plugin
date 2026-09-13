@@ -604,6 +604,23 @@
                     </div>
 
                     <div class="verticalSection">
+                        <h3 class="sectionTitle">Diagnostics</h3>
+                        <div class="checkboxContainer checkboxContainer-withDescription">
+                            <label class="emby-checkbox-label">
+                                <input type="checkbox" id="EnableClientLogUpload" is="emby-checkbox" />
+                                <span>Enable client log upload</span>
+                            </label>
+                            <div class="fieldDescription">
+                                Lets Moonfin clients send diagnostic and crash reports to this server, where they
+                                appear under Logs as <code>upload_&lt;client&gt;_&lt;version&gt;_&lt;time&gt;.txt</code>.
+                                This is what makes the app's "Send report to server" button work. Reports have
+                                server addresses, IP addresses and access tokens stripped out before they leave
+                                the device, and each user can upload 10 an hour, up to 1 MB each.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="verticalSection">
                         <h3 class="sectionTitle">Moonfin Web Client</h3>
                         <div class="inputContainer">
                             <label class="inputLabel inputLabelUnfocused" for="WebDefaultServerUrl">Default Server URL (Optional)</label>

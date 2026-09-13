@@ -1892,6 +1892,7 @@ define(['baseView', 'loading', 'emby-input', 'emby-button', 'emby-checkbox', 'em
             view.querySelector('#WebDefaultServerUrl').value = config.WebDefaultServerUrl || '';
             view.querySelector('#WebForcedServerUrl').value = config.WebForcedServerUrl || '';
             view.querySelector('#WebEnableWebRtcScan').checked = config.WebEnableWebRtcScan !== false;
+            view.querySelector('#EnableClientLogUpload').checked = config.EnableClientLogUpload !== false;
 
             view.querySelector('#GamesEnabled').checked = config.GamesEnabled === true;
             loadGameLibraryPicker(view, config.GameLibraryIds || []);
@@ -2172,6 +2173,7 @@ define(['baseView', 'loading', 'emby-input', 'emby-button', 'emby-checkbox', 'em
             config.WebDefaultServerUrl = view.querySelector('#WebDefaultServerUrl').value || null;
             config.WebForcedServerUrl = view.querySelector('#WebForcedServerUrl').value || null;
             config.WebEnableWebRtcScan = view.querySelector('#WebEnableWebRtcScan').checked;
+            config.EnableClientLogUpload = view.querySelector('#EnableClientLogUpload').checked;
 
             config.GamesEnabled = view.querySelector('#GamesEnabled').checked;
             config.GameLibraryIds = Array.prototype.slice.call(view.querySelectorAll('.gameLibraryCb:checked'))

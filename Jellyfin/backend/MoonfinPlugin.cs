@@ -67,11 +67,27 @@ public class MoonfinPlugin : BasePlugin<PluginConfiguration>, IHasWebPages
     public new string DataFolderPath => Path.Combine(ApplicationPaths.PluginConfigurationsPath, "Moonfin");
 
     /// <summary>
-    /// Resolves the plugin's data folder for callers that may run before the plugin instance
-    /// exists (e.g. a DI factory during host startup): falls back to the same
-    /// ApplicationData/Jellyfin/plugins/Moonfin path Jellyfin itself would use, mirroring
-    /// <see cref="DataFolderPath"/>.
+    /// Resolves the log folder path for the plugin, falling back to the data folder if the log directory is unavailable.
     /// </summary>
+    public static string ResolveLogFolderPath()
+    {
+        try
+        {
+            var path = Instance?.ApplicationPaths.LogDirectoryPath;
+            if (!string.IsNullOrWhiteSpace(path))
+            {
+                return path;
+            }
+        }
+        catch
+        {
+            // A host that wont hand over its log directory just means the log lands in the
+            // data folder instead, which is still somewhere the admin can reach.
+        }
+
+        return ResolveDataFolderPath();
+    }
+
     public static string ResolveDataFolderPath() =>
         Instance?.DataFolderPath
         ?? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Jellyfin", "plugins", "Moonfin");

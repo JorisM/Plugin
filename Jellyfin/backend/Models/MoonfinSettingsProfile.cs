@@ -27,6 +27,9 @@ public class MoonfinSettingsProfile
     [JsonPropertyName("showSeerrAvailabilityBadges")]
     public bool? ShowSeerrAvailabilityBadges { get; set; }
 
+    [JsonPropertyName("showBookDiscoverTab")]
+    public bool? ShowBookDiscoverTab { get; set; }
+
     [JsonPropertyName("seerrRows")]
     public SeerrRowsConfig? SeerrRows { get; set; }
 

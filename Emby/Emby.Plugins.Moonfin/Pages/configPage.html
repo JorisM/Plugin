@@ -987,6 +987,17 @@
                                 </select>
                             </div>
                             <div class="inputContainer">
+                                <label class="inputLabel inputLabelUnfocused" for="DefaultShowBookDiscoverTab">Show Book Library Discovery</label>
+                                <select id="DefaultShowBookDiscoverTab" is="emby-select">
+                                    <option value="">Not set (user decides)</option>
+                                    <option value="true">Yes</option>
+                                    <option value="false">No</option>
+                                </select>
+                                <div class="fieldDescription">
+                                    The discovery tab in book and audiobook libraries, which browses titles from Open Library and LibriVox. This is the default only. A user can still turn it back on for themselves.
+                                </div>
+                            </div>
+                            <div class="inputContainer">
                                 <label class="inputLabel inputLabelUnfocused" for="DefaultBrowsingBlur">Browsing Background Blur</label>
                                 <div style="display:flex; align-items:center; gap: 12px; margin-top: 6px; max-width: 440px;">
                                     <select id="DefaultBrowsingBlur_Set" is="emby-select" style="width: auto; min-width: 195px;">

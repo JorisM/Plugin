@@ -102,6 +102,7 @@ public class MoonfinPlugin : BasePlugin<PluginConfiguration>, IHasWebPages
         }
 
         var previousUrl = Configuration.PublicServerUrl;
+        var previousGamesEnabled = Configuration.GamesEnabled;
         var previousGameLibraryIds = Configuration.GameLibraryIds?.ToList() ?? new List<string>();
         base.UpdateConfiguration(configuration);
 
@@ -122,8 +123,15 @@ public class MoonfinPlugin : BasePlugin<PluginConfiguration>, IHasWebPages
         // picked library's games acquire artwork without waiting for a scheduled scan or a restart.
         // GameArtworkReconciliationService is registered as a concrete singleton and reused as the
         // hosted service (see PluginServiceRegistrator), so this resolves the running instance.
+        // Turning retro games on counts too. Reconciliation skips every library while the
+        // feature is off, so a server whose games were disabled at startup has an empty
+        // catalog and no ROM-root watchers. If only the library selection were watched here,
+        // enabling games on an already-selected library would leave artwork unresolved until
+        // a scheduled scan or a restart.
         var newGameLibraryIds = Configuration.GameLibraryIds ?? new List<string>();
-        if (!previousGameLibraryIds.OrderBy(id => id, StringComparer.OrdinalIgnoreCase)
+        var gamesJustEnabled = !previousGamesEnabled && Configuration.GamesEnabled;
+        if (gamesJustEnabled ||
+            !previousGameLibraryIds.OrderBy(id => id, StringComparer.OrdinalIgnoreCase)
                 .SequenceEqual(newGameLibraryIds.OrderBy(id => id, StringComparer.OrdinalIgnoreCase), StringComparer.OrdinalIgnoreCase))
         {
             try
